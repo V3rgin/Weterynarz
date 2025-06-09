@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.Button;
 
@@ -20,8 +21,9 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private Spinner gatunek;
+    private TimePicker czas;
     private EditText daneWlasciciela, celWizyty;
-    private TextView wiek;
+    private TextView wiek, info;
     private Button potwierdz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
         daneWlasciciela = findViewById(R.id.daneWlasciciela);
         celWizyty = findViewById(R.id.celWizyty);
         wiek = findViewById(R.id.wiek);
-        potwierdz = findViewById(R.id.confirm);
+        info = findViewById(R.id.informacje);
+        potwierdz = findViewById(R.id.potwierdz);
+        czas = findViewById(R.id.timePicker);
 
+        czas.setHour(16);
+        czas.setMinute(0);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.gatunek, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -43,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedUnit = parent.getItemAtPosition(position).toString();
-                if(selectedUnit == "Pies"){
+                if(selectedUnit.equals("Pies")){
                     seekBar.setMax(18);
-                } else if(selectedUnit == "Kot"){
+                } else if(selectedUnit.equals("Kot")){
                     seekBar.setMax(20);
-                } else if(selectedUnit == "Świnka Morska") {
+                } else if(selectedUnit.equals("Świnka Morska")) {
                     seekBar.setMax(9);
                 }
             }
@@ -63,18 +69,24 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
-
+                wiek.setText(String.valueOf(progressValue));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(MainActivity.this, "Zaczynasz regulację!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
+        });
+
+
+        potwierdz.setOnClickListener(view -> {
+            info.setText(daneWlasciciela.getText() + ", " + gatunek.getSelectedItem() + ", " + wiek.getText() + ", "
+                    + celWizyty.getText() + ", " + czas.getHour() + ":" + czas.getMinute());
         });
 
     }

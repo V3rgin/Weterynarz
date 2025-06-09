@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:orientation="vertical"
+    android:background="#90EE90"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -11,6 +12,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:background="#2E8B57"
+        android:padding="10dp"
         android:text="Wizyta u weterynarza"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,26 +41,26 @@
         android:minWidth="200dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ile ma lat?"/>
+            android:text="Ile ma lat? "/>
         <TextView
             android:id="@+id/wiek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="0"/>
+
         <SeekBar
             android:id="@+id/seekBar"
+            android:layout_width="377dp"
+            android:layout_height="match_parent"
             android:max="20"
-            android:progress="0"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:progress="0" />
     </LinearLayout>
 
     <EditText
@@ -73,8 +77,14 @@
         />
 
     <Button
-        android:id="@+id/confirm"
+        android:id="@+id/potwierdz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"/>
+
+    <TextView
+        android:id="@+id/informacje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
